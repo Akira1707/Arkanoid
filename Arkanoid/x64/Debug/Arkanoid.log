@@ -1,16 +1,33 @@
-﻿  main.cpp
-D:\2 kypce\Arkanoid\main.cpp(12,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\2 kypce\Arkanoid\main.cpp(86,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(86,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(108,54): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(108,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(138,49): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(138,42): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(144,33): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(147,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(301,21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(303,34): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(310,21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(311,26): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\main.cpp(391,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  Bonus.cpp
+D:\2 kypce\Arkanoid\Game.h(14,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Bonus.cpp')
+  
+  Game.cpp
+D:\2 kypce\Arkanoid\Game.h(14,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Game.cpp')
+  
+D:\2 kypce\Arkanoid\Game.cpp(47,45): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(47,45): warning C4244:         with
+D:\2 kypce\Arkanoid\Game.cpp(47,45): warning C4244:         [
+D:\2 kypce\Arkanoid\Game.cpp(47,45): warning C4244:             T=float
+D:\2 kypce\Arkanoid\Game.cpp(47,45): warning C4244:         ]
+D:\2 kypce\Arkanoid\Game.cpp(47,38): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(47,38): warning C4244:         with
+D:\2 kypce\Arkanoid\Game.cpp(47,38): warning C4244:         [
+D:\2 kypce\Arkanoid\Game.cpp(47,38): warning C4244:             T=float
+D:\2 kypce\Arkanoid\Game.cpp(47,38): warning C4244:         ]
+D:\2 kypce\Arkanoid\Game.cpp(96,45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(96,38): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(102,29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(105,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(259,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(261,30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(268,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(269,22): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  main.cpp
+D:\2 kypce\Arkanoid\Game.h(14,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'main.cpp')
+  
+D:\2 kypce\Arkanoid\main.cpp(11,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
   Arkanoid.vcxproj -> D:\2 kypce\Arkanoid\x64\Debug\Arkanoid.exe
