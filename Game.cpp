@@ -1,9 +1,7 @@
 #include "Game.h"
 
 Game::Game() 
-    : window(VideoMode(WIDTH, HEIGHT), "Arkanoid Game"),
-    sBall(sf::Vector2f(250, 200)), 
-    sPaddle(sf::Vector2f(230, 440)) 
+    : window(VideoMode(WIDTH, HEIGHT), "Arkanoid Game")
 {
     initGame();
 }
@@ -16,19 +14,19 @@ void Game::initGame() {
     sBackG.setTexture(t);
     h.loadFromFile("images/heart.png");
 
-    sBall.LoadImg("images/ball.png");
-    sPaddle.LoadImg("images/paddle.png");
+    ((Ball*)sBall)->LoadImg("images/ball.png");
+    ((Paddle*)sPaddle)->LoadImg("images/paddle.png");
 
     for (int i = 0; i <= 11; i++) {
         for (int j = 0; j <= 9; j++)
         {
             Vector2f position(i * 43 + 2, j * 20);
 
-            Block block(position, font);
-            if (block.GetType() != 2) BlocksLeft += 1;
+            GameObject* block = new Block(position, font);
+            if ( ((Block*)block)->GetType() != 2) BlocksLeft += 1;
             blocks.push_back(block);
 
-            Bonus bonus(position, font);
+            GameObject* bonus = new Bonus(position, font);
             Bonuses.push_back(bonus);
         }
     }
@@ -79,20 +77,20 @@ void Game::update() {
     }
 
     // Ѕонус: мен€ют прилипание шарика к каретке
-    float d = sPaddle.update();
+    float d = ((Paddle*)sPaddle)->change();
     if (Adhesion == 2) {
-        sBall.SetPosition(sBall.GetPosition().x + d, sBall.GetPosition().y);
+        sBall->SetPosition(sBall->GetPosition().x + d, sBall->GetPosition().y);
         if (Keyboard::isKeyPressed(Keyboard::Enter)) Adhesion = 1;
     }
     if (Adhesion <2) {
-        sBall.Update();        
-        if (change) { sBall.ChangeAngle();}        // Ѕонус: шарик в произвольный момент мен€ет траекторию.
+        sBall->Update();        
+        if (change) { ((Ball*)sBall)->ChangeAngle();}        // Ѕонус: шарик в произвольный момент мен€ет траекторию.
     }
 
     for (int i = 0; i < blocks.size(); i++) {
         CollisionBallBlock(sBall, blocks[i]);
-        if (blocks[i].GetNumber() <= 0 && Bonuses[i].getType() > 0) {
-            Bonuses[i].Update();
+        if (((Block*)blocks[i])->GetNumber() <= 0 && ((Bonus*)Bonuses[i])->getType() > 0) {
+            Bonuses[i]->Update();
         }
         CollisionBonusPaddle(Bonuses[i], sPaddle);
     }
@@ -101,65 +99,70 @@ void Game::update() {
     CollisionWall(sBall);
 }
 
-void Game::CollisionBallBlock(Ball& sBall, Block& block) {
-    if (FloatRect(sBall.GetPosition().x, sBall.GetPosition().y, 12, 12).intersects(block.GetBounds()))
+void Game::CollisionBallBlock(GameObject* sBall, GameObject* block) {
+    Ball* ball = dynamic_cast<Ball*>(sBall);
+    Block* blk = dynamic_cast<Block*>(block);
+    if (FloatRect(ball->GetPosition().x, ball->GetPosition().y, 12, 12).intersects(blk->GetBounds()))
     {
-        sBall.SetAngle(-sBall.GetAngle());
-        if (block.GetType() == 3) {
+        ball->SetAngle(-ball->GetAngle());
+        if (blk->GetType() == 3) {
             scores += 1;
-            block.SetNumber(block.GetNumber() - 1);
-            if (block.GetNumber() == 0) {
+            blk->SetNumber(blk->GetNumber() - 1);
+            if (blk->GetNumber() == 0) {
                 BlocksLeft -= 1;
-                block.SetPosition(-100, -100);
+                blk->SetPosition(-100, -100);
             }
         }
-        else if (block.GetType() == 1) {
-            block.SetNumber(block.GetNumber() - 1);
+        else if (blk->GetType() == 1) {
+            blk->SetNumber(blk->GetNumber() - 1);
             scores += 1;
             BlocksLeft -= 1;
-            block.SetPosition(-100, -100);
-            sBall.ChangeSpeed(0.3);
+            blk->SetPosition(-100, -100);
+            ball->ChangeSpeed(0.3);
         }
     }
 }
 
-void Game::CollisionBallPaddle(Ball& sBall, Paddle& sPaddle) {
-    if (FloatRect(sBall.GetPosition().x, sBall.GetPosition().y + 2, 12, 10).intersects(sPaddle.GetBounds())) {
-        sBall.SetAngle(-sBall.GetAngle());
+void Game::CollisionBallPaddle(GameObject* sBall, GameObject* sPaddle) {
+    if (FloatRect(sBall->GetPosition().x, sBall->GetPosition().y + 2, 12, 10).intersects(((Paddle*)sPaddle)->GetBounds())) {
+        ((Ball*)sBall)->SetAngle(-((Ball*)sBall)->GetAngle());
         if (Adhesion == 1) {
             Adhesion = 2;
         }
     }
 }
 
-void Game::CollisionWall(Ball& sBall) {
-    if (sBall.GetPosition().x < 0 || sBall.GetPosition().x > WIDTH || sBall.GetPosition().y < 0) sBall.SetAngle(180 - sBall.GetAngle());
-    if (sBall.GetPosition().y < 0) sBall.SetAngle(-sBall.GetAngle());
-    if (sBall.GetPosition().y > 440) {
+void Game::CollisionWall(GameObject* sBall) {
+    Ball* ball = dynamic_cast<Ball*>(sBall);
+    if (ball->GetPosition().x < 0 ||ball->GetPosition().x > WIDTH || ball->GetPosition().y < 0) ball->SetAngle(180 - ball->GetAngle());
+    if (ball->GetPosition().y < 0) ball->SetAngle(-ball->GetAngle());
+    if (ball->GetPosition().y > 440) {
         change = false;
         if (filmy) {
             filmy = false;
-            sBall.SetAngle(-sBall.GetAngle());
+            ball->SetAngle(-ball->GetAngle());
         }
         else {
             scores -= 5;
             numberLives -= 1;
-            sBall.SetPosition(250,200);
-            sPaddle.SetScale(- 0.1);
+            ball->SetPosition(250,200);
+            ((Paddle*)sPaddle)->SetScale(- 0.1);
             float angle;
             do {
                 angle = rand() % 140;
             } while ((angle > 75 && angle < 105) || (angle < 15));
-            sBall.SetAngle(angle);
+            ball->SetAngle(angle);
         }
     }
 }
 
-void Game::CollisionBonusPaddle(Bonus& bonus, Paddle& sPaddle) {
-    if (bonus.getType() > 0 && bonus.GetBounds().intersects(sPaddle.GetBounds())) {
-        bonus.SetPosition(-100, 0);
-        applyBonus(bonus.getType());
-        if (bonus.getType() || bonus.getType() == 5) {
+void Game::CollisionBonusPaddle(GameObject* bonus, GameObject* sPaddle) {
+    Bonus* b = dynamic_cast<Bonus*>(bonus);
+    Paddle* paddle = dynamic_cast<Paddle*>(sPaddle);
+    if (b->getType() > 0 && b->GetBounds().intersects(paddle->GetBounds())) {
+        b->SetPosition(-100, 0);
+        applyBonus(b->getType());
+        if (b->getType() || b->getType() == 5) {
             bonusClock.restart();
         }
     }
@@ -169,12 +172,12 @@ void Game::applyBonus(int type) {
     switch (type) {
     case 1: {         
         float m = 2 * (rand() % 2) - 1;
-        sPaddle.SetScale(m*0.1);
+        ((Paddle*)sPaddle)->SetScale(m*0.1);
         break;
     }
     case 2: {         
         float m = 2 * (rand() % 2) - 1;
-        sBall.ChangeSpeed(m * 0.3);
+        ((Ball*)sBall)->ChangeSpeed(m * 0.3);
         break;
     }
     case 3: {       
@@ -210,13 +213,13 @@ void Game::render() {
         window.draw(FPaddle);
     }    
     
-    sBall.Draw(window);
-    sPaddle.Draw(window);
+    sBall->Draw(window);
+    sPaddle->Draw(window);
 
     for (int i = 0; i < blocks.size(); i++) {
-        blocks[i].Draw(window);
-        if (blocks[i].GetNumber() <= 0 && Bonuses[i].getType() != 0) {
-            Bonuses[i].Draw(window);
+        blocks[i]->Draw(window);
+        if (((Block*)blocks[i])->GetNumber() <= 0 && ((Bonus*)Bonuses[i])->getType() != 0) {
+            Bonuses[i]->Draw(window);
         }
     }
 

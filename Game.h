@@ -21,13 +21,14 @@ private:
     float bonusDuration = 5.0f;
     Font font;
 
+    GameObject* sBall = new Ball(Vector2f(250, 200));
+    GameObject* sPaddle = new Paddle(Vector2f(230, 440));
+
     Texture t, h;
     Sprite sBackG;
-    Ball sBall;
-    Paddle sPaddle;
     RectangleShape FPaddle;
-    std::vector<Block> blocks;
-    std::vector<Bonus> Bonuses;
+    std::vector<GameObject*> blocks;
+    std::vector<GameObject*> Bonuses;
     std::vector<Sprite> sHearts;
 
     int BlocksLeft = 0;
@@ -43,10 +44,11 @@ private:
     void processEvents();
     void render();
 
-    void CollisionBallBlock(Ball& sBall, Block& block);
-    void CollisionBallPaddle(Ball& sBall, Paddle& sPaddle);
-    void CollisionWall(Ball& sBall);
-    void CollisionBonusPaddle(Bonus& bonus, Paddle& sPaddle);   
+    void CollisionBallBlock(GameObject* sBall, GameObject* block);
+
+    void CollisionBallPaddle(GameObject* sBall, GameObject* sPaddle);
+    void CollisionWall(GameObject* sBall);
+    void CollisionBonusPaddle(GameObject* bonus, GameObject* sPaddle);
 
 public:
     Game();

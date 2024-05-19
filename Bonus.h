@@ -5,7 +5,7 @@ using namespace sf;
 class Bonus : public GameObject {
 public:
 	Bonus(Vector2f position_, Font& font);
-	void Update();
+	void Update() override;
 	void Draw(RenderWindow& window) override;
 	int getType();
 	FloatRect GetBounds();

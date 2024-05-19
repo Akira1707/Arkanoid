@@ -8,7 +8,8 @@ public:
 	Paddle(Vector2f position_);
 	void LoadImg(const std::string& file_name);
 	void Draw(RenderWindow& window) override;
-	float update();
+	void Update() override;
+	float change();
 	FloatRect GetBounds();
 	void SetScale(float s);
 private:
