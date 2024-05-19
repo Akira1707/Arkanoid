@@ -1,110 +1,47 @@
 #include "Game.h"
 
-Game::Game() : window(VideoMode(WIDTH, HEIGHT), "Arkanoid Game") {
-    window.setFramerateLimit(60);
-    font.loadFromFile("fonts/arial.ttf");
-
-    t1.loadFromFile("images/BackG.png");
-    t2.loadFromFile("images/ball.png");
-    t3.loadFromFile("images/paddle.png");
-    t4.loadFromFile("images/heart.png");
-
-    FPaddle.setSize(Vector2f(520, 9));
-    FPaddle.setPosition(0, 440);
-    FPaddle.setFillColor(Color(226, 238, 245));
-
-    sBackG.setTexture(t1);
-    sBall.setTexture(t2);
-    sPaddle.setTexture(t3);
-
-    sPaddle.setPosition(230, 440);
-    sBall.setPosition(250, 200);
-
-    b1.loadFromFile("images/B01.png");
-    b2.loadFromFile("images/B02.png");
-    b3.loadFromFile("images/B03.png");
-    b4.loadFromFile("images/B04.png");
-    b5.loadFromFile("images/B05.png");
-
+Game::Game() 
+    : window(VideoMode(WIDTH, HEIGHT), "Arkanoid Game"),
+    sBall(sf::Vector2f(250, 200)), 
+    sPaddle(sf::Vector2f(230, 440)) 
+{
     initGame();
 }
 
-void Game::play() {
-    started = filmy = change = bonusActive = false;
-    Adhesion = 0;
-    while (window.isOpen()) {
-        processEvents();
-        if (started) update();
-        render();
-    }
-}
-
-
 void Game::initGame() {
+    window.setFramerateLimit(60);
+    font.loadFromFile("fonts/arial.ttf");
+
+    t.loadFromFile("images/BackG.png");
+    sBackG.setTexture(t);
+    h.loadFromFile("images/heart.png");
+
+    sBall.LoadImg("images/ball.png");
+    sPaddle.LoadImg("images/paddle.png");
+
     for (int i = 0; i <= 11; i++) {
         for (int j = 0; j <= 9; j++)
         {
             Vector2f position(i * 43 + 2, j * 20);
-            Vector2f size(42, 19);
 
-            int number = rand() % 10 - 2;
-            if (number < 1) number = 1;
-
-            Color color;
-            int randValue = rand() % 100;
-            if (randValue > 95) {
-                color = Color(64, 134, 68);          //Блоки, увеличивающие скорость шарика
-                number = 1;
-            }
-            else if (randValue > 85) {
-                color = Color(90, 100, 105);         //Неразрушаемые блоки
-            }
-            else {
-                color = Color(165, 110, 188);       //Блоки имеют уровень здоровья
-            }
-
-            Block block(position, size, color, number, font);
+            Block block(position, font);
+            if (block.GetType() != 2) BlocksLeft += 1;
             blocks.push_back(block);
 
-            randValue = rand() % 100;
-            int type;
-            Sprite bonus;
-            if (randValue > 90) {
-                bonus.setTexture(b1);
-                type = 1;
-            }
-            else if (randValue > 80) {
-                bonus.setTexture(b2);
-                type = 2;
-            }
-            else if (randValue > 70) {
-                bonus.setTexture(b3);
-                type = 3;
-            }
-            else if (randValue > 60) {
-                bonus.setTexture(b4);
-                type = 4;
-            }
-            else if (randValue > 50) {
-                bonus.setTexture(b5);
-                type = 5;
-            }
-            else {
-                bonus.setTexture(b5);
-                type = 0;
-            }
-            bonus.setPosition(i * 43 + 2, j * 20);
-            Bonus b(bonus, type);
-            Bonuses.push_back(b);
+            Bonus bonus(position, font);
+            Bonuses.push_back(bonus);
         }
     }
 
-    BlocksLeft = blocks.size();
     for (int i = 0; i < numberLives; i++) {
-        Sprite heart(t4);
+        Sprite heart(h);
         heart.setPosition(i * 22 + 80, 465);
         sHearts.push_back(heart);
     }
+
+    FPaddle.setSize(Vector2f(520, 9));
+    FPaddle.setPosition(0, 440);
+    FPaddle.setFillColor(Color(226, 238, 245));
 
     textLives.setFont(font);
     textLives.setCharacterSize(24);
@@ -121,7 +58,7 @@ void Game::initGame() {
     message.setCharacterSize(50);
     message.setFillColor(Color::White);
     message.setPosition(180, 200);
-    message.setString("Start");
+    message.setString("Start");  
 
     bonusText.setFont(font);
     bonusText.setCharacterSize(24);
@@ -131,6 +68,7 @@ void Game::initGame() {
 
 void Game::update() {
     float elapsedTime = bonusClock.getElapsedTime().asSeconds();
+
     //У бонусов ограничение по времени(меняют прилипание шарика к каретке и шарик в произвольный момент меняет траекторию)
     if (elapsedTime > bonusDuration) {
         Adhesion = 0;
@@ -141,143 +79,113 @@ void Game::update() {
     }
 
     // Бонус: меняют прилипание шарика к каретке
+    float d = sPaddle.update();
     if (Adhesion == 2) {
-        if (Keyboard::isKeyPressed(Keyboard::Right)) {
-            sPaddle.move(6, 0);
-            if (sPaddle.getGlobalBounds().left + sPaddle.getGlobalBounds().width > WIDTH) {
-                sPaddle.setPosition(WIDTH - sPaddle.getGlobalBounds().width, sPaddle.getPosition().y);
-            }
-            else x += 6;
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Left)) {
-            sPaddle.move(-6, 0);
-            if (sPaddle.getGlobalBounds().left < 0) {
-                sPaddle.setPosition(0, sPaddle.getPosition().y);
-            }
-            else x -= 6;
-        }
+        sBall.SetPosition(sBall.GetPosition().x + d, sBall.GetPosition().y);
         if (Keyboard::isKeyPressed(Keyboard::Enter)) Adhesion = 1;
     }
-    else {
-        x += dBall * cos(angleBall * PI / 180);
-        y += dBall * sin(angleBall * PI / 180);
-
-        // Бонус: шарик в произвольный момент меняет траекторию.
-        if (change) {
-            int changed = rand() % 100;
-            if (changed > 95) {
-                do {
-                    angleBall = rand() % 360;
-                } while (15 > angleBall || angleBall > 345 || (angleBall > 75 && angleBall < 105) || (angleBall > 165 && angleBall < 195) || (angleBall > 255 && angleBall < 285));
-            }
-        }
-
-        //Проверить пересечение шара и прямоугольного блока.
-        for (int i = 0; i < blocks.size(); i++) {
-            if (FloatRect(x + 3, y + 3, 6, 6).intersects(blocks[i].block.getGlobalBounds()))
-            {
-                angleBall = -angleBall;
-                if (blocks[i].block.getFillColor() == Color(165, 110, 188)) {
-                    scores += 1;
-                    blocks[i].number -= 1;
-                    if (blocks[i].number == 0) {
-                        blocks[i].block.setPosition(-100, 0);
-                        BlocksLeft -= 1;
-                    }
-                }
-                else if (blocks[i].block.getFillColor() == Color(64, 134, 68)) {
-                    blocks[i].number  -= 1;
-                    scores += 1;
-                    BlocksLeft -= 1;
-                    dBall += 0.5;
-                }
-            }
-        }
-
-        //Проверить пересечение шара и каретка.
-        if (FloatRect(x, y, 12, 12).intersects(sPaddle.getGlobalBounds())) {
-            angleBall = -angleBall;
-            if (Adhesion == 1) {
-                Adhesion = 2;
-            }
-        }
-
-        // отражаясь от стен
-        if (x < 0 || x > WIDTH || y < 0) angleBall = 180 - angleBall;
-        if (y < 0) angleBall = -angleBall;
-        if (y > 440) {
-            change = false;
-            if (filmy) {
-                filmy = false;
-                angleBall = -angleBall;
-            }
-            else {
-                scores -= 5;
-                numberLives -= 1;
-                x = 250; y = 200;
-                //sPaddle.setPosition(230, 440);
-                sBall.setPosition(x, y);
-                sPaddle.setScale(sPaddle.getScale().x - 0.1f, sPaddle.getScale().y);
-                do {
-                    angleBall = rand() % 140;
-                } while (angleBall > 75 && angleBall < 105);
-                return;
-            }
-        }
-
-        if (Keyboard::isKeyPressed(Keyboard::Right)) sPaddle.move(6, 0);
-        if (Keyboard::isKeyPressed(Keyboard::Left)) sPaddle.move(-6, 0);
-        if (sPaddle.getGlobalBounds().left < 0) {
-            sPaddle.setPosition(0, sPaddle.getPosition().y);
-        }
-        if (sPaddle.getGlobalBounds().left + sPaddle.getGlobalBounds().width > WIDTH) {
-            sPaddle.setPosition(WIDTH - sPaddle.getGlobalBounds().width, sPaddle.getPosition().y);
-        }
+    if (Adhesion <2) {
+        sBall.Update();        
+        if (change) { sBall.ChangeAngle();}        // Бонус: шарик в произвольный момент меняет траекторию.
     }
 
-    //Бонусы
     for (int i = 0; i < blocks.size(); i++) {
-        if (blocks[i].number <= 0 && Bonuses[i].type > 0) {
-            Bonuses[i].update();
+        CollisionBallBlock(sBall, blocks[i]);
+        if (blocks[i].GetNumber() <= 0 && Bonuses[i].getType() > 0) {
+            Bonuses[i].Update();
         }
-        if (Bonuses[i].type > 0 && Bonuses[i].bonus.getGlobalBounds().intersects(sPaddle.getGlobalBounds())) {
-            Bonuses[i].bonus.setPosition(-100, 0);
-            applyBonus(Bonuses[i].type);
-            if (Bonuses[i].type == 3 || Bonuses[i].type == 5) {
-                bonusClock.restart();
-            }
-        }
+        CollisionBonusPaddle(Bonuses[i], sPaddle);
     }
 
-    sBall.setPosition(x, y);
+    CollisionBallPaddle(sBall, sPaddle);
+    CollisionWall(sBall);
+}
+
+void Game::CollisionBallBlock(Ball& sBall, Block& block) {
+    if (FloatRect(sBall.GetPosition().x, sBall.GetPosition().y, 12, 12).intersects(block.GetBounds()))
+    {
+        sBall.SetAngle(-sBall.GetAngle());
+        if (block.GetType() == 3) {
+            scores += 1;
+            block.SetNumber(block.GetNumber() - 1);
+            if (block.GetNumber() == 0) {
+                BlocksLeft -= 1;
+                block.SetPosition(-100, -100);
+            }
+        }
+        else if (block.GetType() == 1) {
+            block.SetNumber(block.GetNumber() - 1);
+            scores += 1;
+            BlocksLeft -= 1;
+            block.SetPosition(-100, -100);
+            sBall.ChangeSpeed(0.3);
+        }
+    }
+}
+
+void Game::CollisionBallPaddle(Ball& sBall, Paddle& sPaddle) {
+    if (FloatRect(sBall.GetPosition().x, sBall.GetPosition().y + 2, 12, 10).intersects(sPaddle.GetBounds())) {
+        sBall.SetAngle(-sBall.GetAngle());
+        if (Adhesion == 1) {
+            Adhesion = 2;
+        }
+    }
+}
+
+void Game::CollisionWall(Ball& sBall) {
+    if (sBall.GetPosition().x < 0 || sBall.GetPosition().x > WIDTH || sBall.GetPosition().y < 0) sBall.SetAngle(180 - sBall.GetAngle());
+    if (sBall.GetPosition().y < 0) sBall.SetAngle(-sBall.GetAngle());
+    if (sBall.GetPosition().y > 440) {
+        change = false;
+        if (filmy) {
+            filmy = false;
+            sBall.SetAngle(-sBall.GetAngle());
+        }
+        else {
+            scores -= 5;
+            numberLives -= 1;
+            sBall.SetPosition(250,200);
+            sPaddle.SetScale(- 0.1);
+            float angle;
+            do {
+                angle = rand() % 140;
+            } while ((angle > 75 && angle < 105) || (angle < 15));
+            sBall.SetAngle(angle);
+        }
+    }
+}
+
+void Game::CollisionBonusPaddle(Bonus& bonus, Paddle& sPaddle) {
+    if (bonus.getType() > 0 && bonus.GetBounds().intersects(sPaddle.GetBounds())) {
+        bonus.SetPosition(-100, 0);
+        applyBonus(bonus.getType());
+        if (bonus.getType() || bonus.getType() == 5) {
+            bonusClock.restart();
+        }
+    }
 }
 
 void Game::applyBonus(int type) {
     switch (type) {
-    case 1: {         //меняют размер каретки
-        Vector2f currentSize = sPaddle.getScale();
+    case 1: {         
         float m = 2 * (rand() % 2) - 1;
-        float newX;
-        newX = currentSize.x + 0.1 * m;
-        if (newX > 4.0f) newX = 4.0f;
-        if (newX < 0.2f) newX = 0.2f;
-        sPaddle.setScale(newX, currentSize.y);
+        sPaddle.SetScale(m*0.1);
         break;
     }
-    case 2: {         //меняют скорость шарика
+    case 2: {         
         float m = 2 * (rand() % 2) - 1;
-        dBall += 0.5 * m;
+        sBall.ChangeSpeed(m * 0.3);
         break;
     }
-    case 3: {        //меняют прилипание шарика к каретке
+    case 3: {       
         Adhesion = 1;
         break;
     }
-    case 4: {        //одноразовое дно для шарика
+    case 4: {        
         filmy = true;
         break;
     }
-    case 5: {        //шарик в произвольный момент меняет траекторию
+    case 5: {       
         change = true;
         break;
     }
@@ -297,25 +205,29 @@ void Game::processEvents() {
 void Game::render() {
     window.clear();
     window.draw(sBackG);
-    window.draw(sBall);
+
     if (filmy) {
         window.draw(FPaddle);
-    }
-    window.draw(sPaddle);
-    window.draw(textLives);
-    textScores.setString("Scores: " + std::to_string(scores));
-    window.draw(textScores);
+    }    
+    
+    sBall.Draw(window);
+    sPaddle.Draw(window);
 
     for (int i = 0; i < blocks.size(); i++) {
-        blocks[i].draw(window);
-        if (blocks[i].number <= 0 && Bonuses[i].type != 0) {
-            Bonuses[i].draw(window);
+        blocks[i].Draw(window);
+        if (blocks[i].GetNumber() <= 0 && Bonuses[i].getType() != 0) {
+            Bonuses[i].Draw(window);
         }
     }
 
     for (int i = 0; i < numberLives; i++) {
         window.draw(sHearts[i]);
     }
+
+    window.draw(textLives);
+    textScores.setString("Scores: " + std::to_string(scores));
+    window.draw(textScores);
+
     if (BlocksLeft == 0) {
         message.setString("Win!");
         window.draw(message);
@@ -334,5 +246,14 @@ void Game::render() {
     if (Adhesion > 0 || change == true) {
         window.draw(bonusText);
     }
+
     window.display();
+}
+
+void Game::play() {
+    while (window.isOpen()) {
+        processEvents();
+        if (started) update();
+        render();
+    }
 }

@@ -1,14 +1,19 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "GameObject.h"
 using namespace sf;
 
-class Bonus {
+class Bonus : public GameObject {
 public:
-    Sprite bonus;
-    int type; 
-    float dBonus = 3.0;
+	Bonus(Vector2f position_, Font& font);
+	void Update();
+	void Draw(RenderWindow& window) override;
+	int getType();
+	FloatRect GetBounds();
 
-    Bonus(Sprite& sprite, int type);
-    void update();
-    void draw(sf::RenderWindow& window);    
+private:
+	Sprite bonus;
+	Texture t;
+	int type;
+	const float dBonus = 3.0;
 };
+

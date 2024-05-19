@@ -1,12 +1,19 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "GameObject.h"
 using namespace sf;
 
-class Block {
+class Block : public GameObject{
 public:
+	Block(Vector2f position_, Font& font);
+	void Draw(RenderWindow& windoem) override;
+    FloatRect GetBounds();
+    int GetType();
+    int GetNumber();
+    void SetNumber(int n);
+private:
     RectangleShape block;
     Text text;  
-    int number;  
-    Block(Vector2f position, Vector2f size, Color color, int number, Font& font);
-    void draw(sf::RenderWindow& window);
+    int number; 
+    int type;
 };
