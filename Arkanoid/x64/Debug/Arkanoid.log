@@ -1,0 +1,30 @@
+﻿  Bonus.cpp
+  Game.cpp
+D:\2 kypce\Arkanoid\Constants.h(4,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Game.cpp')
+  
+D:\2 kypce\Arkanoid\Game.cpp(23,45): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(23,45): warning C4244:         with
+D:\2 kypce\Arkanoid\Game.cpp(23,45): warning C4244:         [
+D:\2 kypce\Arkanoid\Game.cpp(23,45): warning C4244:             T=float
+D:\2 kypce\Arkanoid\Game.cpp(23,45): warning C4244:         ]
+D:\2 kypce\Arkanoid\Game.cpp(23,38): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(23,38): warning C4244:         with
+D:\2 kypce\Arkanoid\Game.cpp(23,38): warning C4244:         [
+D:\2 kypce\Arkanoid\Game.cpp(23,38): warning C4244:             T=float
+D:\2 kypce\Arkanoid\Game.cpp(23,38): warning C4244:         ]
+D:\2 kypce\Arkanoid\Game.cpp(36,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(121,31): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\2 kypce\Arkanoid\Game.cpp(149,44): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\2 kypce\Arkanoid\Game.cpp(152,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(174,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(175,39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(179,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\2 kypce\Arkanoid\Game.cpp(180,39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  main.cpp
+D:\2 kypce\Arkanoid\Constants.h(4,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'main.cpp')
+  
+D:\2 kypce\Arkanoid\main.cpp(4,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+  Arkanoid.vcxproj -> D:\2 kypce\Arkanoid\x64\Debug\Arkanoid.exe
