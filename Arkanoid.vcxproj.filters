@@ -45,7 +45,28 @@
     <ClCompile Include="Bonuses.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BonusVisitor.cpp">
+    <ClCompile Include="BonusChangePaddle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BonusChangeAdhesion.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BonusFilmyPaddle.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BonusChangeSpeed.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BonusChangeAdhesion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BonusFilmyPaddle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BonusChangeTrajectory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ApplyVisitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,6 +99,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bonuses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BonusVisitor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BonusChangePaddle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BonusChangeSpeed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BonusChangeTrajectory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplyVisitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

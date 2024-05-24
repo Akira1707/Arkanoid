@@ -155,10 +155,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ApplyVisitor.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Bonus.cpp" />
-    <ClCompile Include="BonusVisitor.cpp" />
+    <ClCompile Include="BonusChangeAdhesion.cpp" />
+    <ClCompile Include="BonusChangeAdhesion.h" />
+    <ClCompile Include="BonusChangePaddle.cpp" />
+    <ClCompile Include="BonusChangeSpeed.cpp" />
+    <ClCompile Include="BonusChangeTrajectory.cpp" />
+    <ClCompile Include="BonusFilmyPaddle.cpp" />
+    <ClCompile Include="BonusFilmyPaddle.h" />
     <ClCompile Include="Bonuses.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -168,9 +175,14 @@
     <ClCompile Include="Scores.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ApplyVisitor.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Bonus.h" />
+    <ClInclude Include="BonusChangePaddle.h" />
+    <ClInclude Include="BonusChangeSpeed.h" />
+    <ClInclude Include="BonusChangeTrajectory.h" />
+    <ClInclude Include="BonusVisitor.h" />
     <ClInclude Include="Bonuses.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />

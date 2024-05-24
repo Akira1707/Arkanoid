@@ -1,11 +1,18 @@
-D:\pic\Arkanoid\Ball.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Ball.obj
-D:\pic\Arkanoid\Block.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Block.obj
-D:\pic\Arkanoid\Bonus.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Bonus.obj
-D:\pic\Arkanoid\BonusVisitor.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\BonusVisitor.obj
-D:\pic\Arkanoid\Bonuses.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Bonuses.obj
-D:\pic\Arkanoid\Game.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Game.obj
-D:\pic\Arkanoid\GameObject.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\GameObject.obj
-D:\pic\Arkanoid\Lives.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Lives.obj
-D:\pic\Arkanoid\main.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\main.obj
-D:\pic\Arkanoid\Paddle.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Paddle.obj
-D:\pic\Arkanoid\Scores.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Scores.obj
+D:\2 kypce\Arkanoid\ApplyVisitor.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\ApplyVisitor.obj
+D:\2 kypce\Arkanoid\Ball.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\Ball.obj
+D:\2 kypce\Arkanoid\Block.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\Block.obj
+D:\2 kypce\Arkanoid\Bonus.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\Bonus.obj
+D:\2 kypce\Arkanoid\BonusChangeAdhesion.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\BonusChangeAdhesion.obj
+D:\2 kypce\Arkanoid\BonusChangeAdhesion.h;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\BonusChangeAdhesion.obj
+D:\2 kypce\Arkanoid\BonusChangePaddle.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\BonusChangePaddle.obj
+D:\2 kypce\Arkanoid\BonusChangeSpeed.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\BonusChangeSpeed.obj
+D:\2 kypce\Arkanoid\BonusChangeTrajectory.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\BonusChangeTrajectory.obj
+D:\2 kypce\Arkanoid\BonusFilmyPaddle.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\BonusFilmyPaddle.obj
+D:\2 kypce\Arkanoid\BonusFilmyPaddle.h;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\BonusFilmyPaddle.obj
+D:\2 kypce\Arkanoid\Bonuses.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\Bonuses.obj
+D:\2 kypce\Arkanoid\Game.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\Game.obj
+D:\2 kypce\Arkanoid\GameObject.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\GameObject.obj
+D:\2 kypce\Arkanoid\Lives.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\Lives.obj
+D:\2 kypce\Arkanoid\main.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\main.obj
+D:\2 kypce\Arkanoid\Paddle.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\Paddle.obj
+D:\2 kypce\Arkanoid\Scores.cpp;D:\2 kypce\Arkanoid\Arkanoid\x64\Debug\Scores.obj

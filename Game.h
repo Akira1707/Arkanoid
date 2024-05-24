@@ -10,7 +10,7 @@
 #include "Paddle.h"
 #include "Block.h"
 #include "Bonuses.h"
-#include "BonusVisitor.h"
+#include "ApplyVisitor.h"
 #include "Constants.h"
 #include "Scores.h"
 #include "Lives.h"
@@ -36,7 +36,7 @@ private:
     Lives lives;
     Text  message;
     bool started;
-    BonusVisitor bonusVisitor;
+    ApplyVisitor bonusVisitor;
 
     void initGame();
     void update();

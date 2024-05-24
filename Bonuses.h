@@ -1,5 +1,9 @@
 #pragma once
-#include "Bonus.h"
+#include "BonusChangePaddle.h"
+#include "BonusChangeSpeed.h"
+#include "BonusChangeAdhesion.h"
+#include "BonusFilmyPaddle.h"
+#include "BonusChangeTrajectory.h"
 #include <vector>
 using namespace sf;
 
