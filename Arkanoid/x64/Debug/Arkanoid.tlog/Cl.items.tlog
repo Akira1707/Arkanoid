@@ -1,6 +1,8 @@
 D:\pic\Arkanoid\Ball.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Ball.obj
 D:\pic\Arkanoid\Block.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Block.obj
 D:\pic\Arkanoid\Bonus.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Bonus.obj
+D:\pic\Arkanoid\BonusVisitor.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\BonusVisitor.obj
+D:\pic\Arkanoid\Bonuses.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Bonuses.obj
 D:\pic\Arkanoid\Game.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Game.obj
 D:\pic\Arkanoid\GameObject.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\GameObject.obj
 D:\pic\Arkanoid\Lives.cpp;D:\pic\Arkanoid\Arkanoid\x64\Debug\Lives.obj

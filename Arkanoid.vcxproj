@@ -158,6 +158,8 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="Bonus.cpp" />
+    <ClCompile Include="BonusVisitor.cpp" />
+    <ClCompile Include="Bonuses.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Lives.cpp" />
@@ -169,6 +171,7 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Block.h" />
     <ClInclude Include="Bonus.h" />
+    <ClInclude Include="Bonuses.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />

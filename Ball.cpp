@@ -22,7 +22,7 @@ void Ball::Update() {
 
 void Ball::ChangeAngle() {
     int changed = rand() % 100;
-    if (changed > 95) {
+    if (changed > 97) {
         do {
             angleBall = rand() % 360;
         } while (15 > angleBall || angleBall > 345 || (angleBall > 75 && angleBall < 105) || (angleBall > 165 && angleBall < 195) || (angleBall > 255 && angleBall < 285));
@@ -32,6 +32,17 @@ void Ball::ChangeAngle() {
 float Ball::GetAngle() { return angleBall; }
 void Ball::SetAngle(float angle) { angleBall = angle; }
 void Ball::ChangeSpeed(float d) { dBall += d; }
+float Ball::getSpeed() { return dBall; }
+void Ball::setSpeed(float d) { dBall = d; }
+
+void Ball::Start() {
+    SetPosition(250, 200);
+    float angle;
+    do {
+        angle = rand() % 140;
+    } while ((angle > 75 && angle < 105) || (angle < 15));
+    angleBall = angle;
+}
 
 bool Ball:: CollisionBlock(Block& block, Scores& scores) {
     if (FloatRect(position_.x, position_.y, 12, 12).intersects(block.GetBounds()))
@@ -56,33 +67,19 @@ bool Ball:: CollisionBlock(Block& block, Scores& scores) {
     return false;
 }
 
-void Ball::CollisionPaddle(Paddle& sPaddle, int& Adhesion){
+bool Ball::CollisionPaddle(Paddle& sPaddle){
     if (FloatRect(position_.x, position_.y + 2, 12, 8).intersects(sPaddle.GetBounds())) {
         angleBall = -angleBall;
-        if (Adhesion == 1) {
-            Adhesion = 2;
-        }
+        return true;
     }
+    return false;
 }
 
-bool Ball::CollisionWall(bool& change, bool& filmy){
+bool Ball::CollisionWall(){
     if (position_.x < 0 || position_.x > WIDTH || position_.y < 0) angleBall = 180 - angleBall; 
     if (position_.y < 0) angleBall = -angleBall;
-    if (position_.y > 440) {
-        change = false;
-        if (filmy) {
-            filmy = false;
-            angleBall = -angleBall;
-        }
-        else {            
-            SetPosition(250, 200);
-            float angle;
-            do {
-                angle = rand() % 140;
-            } while ((angle > 75 && angle < 105) || (angle < 15));
-            angleBall = angle;
-            return true;
-        }
+    if (position_.y > 435) {
+        return true;
     }
     return false;
 }

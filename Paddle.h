@@ -1,7 +1,6 @@
 #pragma once
 #include "GameObject.h"
 #include "Constants.h"
-using namespace sf;
 
 class Paddle : public GameObject {
 public:
@@ -9,7 +8,7 @@ public:
 	void LoadImg(const std::string& file_name);
 	void Draw(RenderWindow& window) override;
 	void Update() override;
-	float change();
+	float change(float v = 6);
 	FloatRect GetBounds();
 	void SetScale(float s);
 private:

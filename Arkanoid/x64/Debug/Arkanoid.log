@@ -1,8 +1,49 @@
-﻿  Ball.cpp
+﻿  Bonus.cpp
 D:\pic\Arkanoid\Constants.h(4,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Ball.cpp')
+  (compiling source file 'Bonus.cpp')
   
-D:\pic\Arkanoid\Ball.cpp(27,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\pic\Arkanoid\Ball.cpp(52,25): warning C4305: '+=': truncation from 'double' to 'float'
-D:\pic\Arkanoid\Ball.cpp(81,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\pic\Arkanoid\Bonus.cpp(60,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\pic\Arkanoid\Bonus.cpp(61,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\pic\Arkanoid\Bonus.cpp(75,13): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\pic\Arkanoid\Bonus.cpp(76,25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\pic\Arkanoid\Bonus.cpp(100,34): warning C4305: 'argument': truncation from 'double' to 'float'
+  BonusVisitor.cpp
+D:\pic\Arkanoid\Constants.h(4,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'BonusVisitor.cpp')
+  
+  Bonuses.cpp
+D:\pic\Arkanoid\Constants.h(4,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Bonuses.cpp')
+  
+D:\pic\Arkanoid\Bonuses.cpp(9,45): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\pic\Arkanoid\Bonuses.cpp(9,45): warning C4244:         with
+D:\pic\Arkanoid\Bonuses.cpp(9,45): warning C4244:         [
+D:\pic\Arkanoid\Bonuses.cpp(9,45): warning C4244:             T=float
+D:\pic\Arkanoid\Bonuses.cpp(9,45): warning C4244:         ]
+D:\pic\Arkanoid\Bonuses.cpp(9,38): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\pic\Arkanoid\Bonuses.cpp(9,38): warning C4244:         with
+D:\pic\Arkanoid\Bonuses.cpp(9,38): warning C4244:         [
+D:\pic\Arkanoid\Bonuses.cpp(9,38): warning C4244:             T=float
+D:\pic\Arkanoid\Bonuses.cpp(9,38): warning C4244:         ]
+  Game.cpp
+D:\pic\Arkanoid\Constants.h(4,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Game.cpp')
+  
+D:\pic\Arkanoid\Game.cpp(23,45): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\pic\Arkanoid\Game.cpp(23,45): warning C4244:         with
+D:\pic\Arkanoid\Game.cpp(23,45): warning C4244:         [
+D:\pic\Arkanoid\Game.cpp(23,45): warning C4244:             T=float
+D:\pic\Arkanoid\Game.cpp(23,45): warning C4244:         ]
+D:\pic\Arkanoid\Game.cpp(23,38): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+D:\pic\Arkanoid\Game.cpp(23,38): warning C4244:         with
+D:\pic\Arkanoid\Game.cpp(23,38): warning C4244:         [
+D:\pic\Arkanoid\Game.cpp(23,38): warning C4244:             T=float
+D:\pic\Arkanoid\Game.cpp(23,38): warning C4244:         ]
+D:\pic\Arkanoid\Game.cpp(54,27): warning C4305: 'argument': truncation from 'double' to 'float'
+  main.cpp
+D:\pic\Arkanoid\Constants.h(4,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'main.cpp')
+  
+D:\pic\Arkanoid\main.cpp(4,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
   Arkanoid.vcxproj -> D:\pic\Arkanoid\x64\Debug\Arkanoid.exe

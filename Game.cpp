@@ -3,7 +3,7 @@
 Game::Game() 
     : window(VideoMode(WIDTH, HEIGHT), "Arkanoid Game"),
     sBall(sf::Vector2f(250, 200)), 
-    sPaddle(sf::Vector2f(230, 440)), scores(font), lives(font, 5)
+    sPaddle(sf::Vector2f(230, 440)), scores(font), lives(font, 5), bonuses(font, bonusVisitor)
 {
     initGame();
 }
@@ -14,7 +14,6 @@ void Game::initGame() {
 
     t.loadFromFile("images/BackG.png");
     sBackG.setTexture(t);
-
     sBall.LoadImg("images/ball.png");
     sPaddle.LoadImg("images/paddle.png");
 
@@ -26,99 +25,34 @@ void Game::initGame() {
             Block block(position, font);
             if (block.GetType() != 2) BlocksLeft += 1;
             blocks.push_back(block);
-
-            Bonus bonus(position, font);
-            Bonuses.push_back(bonus);
         }
     }
-
-    FPaddle.setSize(Vector2f(520, 9));
-    FPaddle.setPosition(0, 440);
-    FPaddle.setFillColor(Color(226, 238, 245));
 
     message.setFont(font);
     message.setCharacterSize(50);
     message.setFillColor(Color::White);
     message.setPosition(180, 200);
     message.setString("Start");  
-
-    bonusText.setFont(font);
-    bonusText.setCharacterSize(24);
-    bonusText.setFillColor(Color::White);
-    bonusText.setPosition(350, 460);
 }
 
 void Game::update() {
-    float elapsedTime = bonusClock.getElapsedTime().asSeconds();
-
-    if (elapsedTime > bonusDuration) {
-        Adhesion = 0;
-        change = false;
-    }
-    else if (Adhesion > 0 || change == true) {
-        bonusText.setString("Time: " + std::to_string(static_cast<int>(bonusDuration - elapsedTime)));
-    }
-
-    float d = sPaddle.change();
-    if (Adhesion == 2) {
-        sBall.SetPosition(sBall.GetPosition().x + d, sBall.GetPosition().y);
-        if (Keyboard::isKeyPressed(Keyboard::Enter)) Adhesion = 1;
-    }
-    if (Adhesion <2) {
-        sBall.Update();        
-        if (change) { sBall.ChangeAngle();}        
-    }
-
     for (int i = 0; i < blocks.size(); i++) {
-        if (sBall.CollisionBlock(blocks[i], scores)) { BlocksLeft -= 1; };
-        if (blocks[i].GetNumber() <= 0 && Bonuses[i].getType() > 0) {
-            Bonuses[i].Update();
+        if (sBall.CollisionBlock(blocks[i], scores)) { 
+            BlocksLeft -= 1; 
+        };
+        if (blocks[i].GetNumber() <= 0 && bonuses.getBonuses()[i]->getType() > 0) {
+            bonuses.getBonuses()[i]->Update();
         }
-        CollisionBonusPaddle(Bonuses[i], sPaddle);
     }
-
-    sBall.CollisionPaddle(sPaddle, Adhesion);
-    if (sBall.CollisionWall(change, filmy)) {
+    bonuses.update(sPaddle, sBall);
+    float d = sPaddle.change();
+    sBall.Update();
+    sBall.CollisionPaddle(sPaddle);
+    if (sBall.CollisionWall()) {
         scores.update(-5);
         lives.update();
         sPaddle.SetScale(-0.1);
-    }
-}
-
-void Game::CollisionBonusPaddle(Bonus& bonus, Paddle& sPaddle) {
-    if (bonus.getType() > 0 && bonus.GetBounds().intersects(sPaddle.GetBounds())) {
-        bonus.SetPosition(-100, 0);
-        applyBonus(bonus.getType());
-        if (bonus.getType() || bonus.getType() == 5) {
-            bonusClock.restart();
-        }
-    }
-}
-
-void Game::applyBonus(int type) {
-    switch (type) {
-    case 1: {         
-        float m = 2 * (rand() % 2) - 1;
-        sPaddle.SetScale(m*0.1);
-        break;
-    }
-    case 2: {         
-        float m = 2 * (rand() % 2) - 1;
-        sBall.ChangeSpeed(m * 0.3);
-        break;
-    }
-    case 3: {       
-        Adhesion = 1;
-        break;
-    }
-    case 4: {        
-        filmy = true;
-        break;
-    }
-    case 5: {       
-        change = true;
-        break;
-    }
+        sBall.Start();
     }
 }
 
@@ -135,20 +69,15 @@ void Game::processEvents() {
 void Game::render() {
     window.clear();
     window.draw(sBackG);
-
-    if (filmy) {
-        window.draw(FPaddle);
-    }    
     
     sBall.Draw(window);
-    sPaddle.Draw(window);
-
     for (int i = 0; i < blocks.size(); i++) {
         blocks[i].Draw(window);
-        if (blocks[i].GetNumber() <= 0 && Bonuses[i].getType() != 0) {
-            Bonuses[i].Draw(window);
+        if (blocks[i].GetNumber() <= 0 && bonuses.getBonuses()[i]->getType() != 0) {
+            bonuses.getBonuses()[i]->Draw(window);
         }
     }   
+    sPaddle.Draw(window);
 
     if (BlocksLeft == 0) {
         message.setString("Win!");
@@ -160,9 +89,6 @@ void Game::render() {
     
     if (!started) {
         window.draw(message);
-    }
-    if (Adhesion > 0 || change == true) {
-        window.draw(bonusText);
     }
 
     lives.Draw(window, message);

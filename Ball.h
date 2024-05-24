@@ -4,7 +4,6 @@
 #include "Paddle.h"
 #include "Scores.h"
 #include "Constants.h"
-using namespace sf;
 
 class Ball : public GameObject {
 public:
@@ -15,11 +14,14 @@ public:
 	void ChangeAngle();
 	float GetAngle();
 	void SetAngle(float angle);
+	float getSpeed();
+	void setSpeed(float d);
 	void ChangeSpeed(float d);
+	void Start();
 
 	bool CollisionBlock(Block& block, Scores& scores);
-	void CollisionPaddle(Paddle& sPaddle, int& Adhesion);
-	bool CollisionWall(bool& change, bool& filmy);
+	bool CollisionPaddle(Paddle& sPaddle);
+	bool CollisionWall();
 
 private:
 	Sprite sBall;

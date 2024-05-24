@@ -9,7 +9,8 @@
 #include "Ball.h"
 #include "Paddle.h"
 #include "Block.h"
-#include "Bonus.h"
+#include "Bonuses.h"
+#include "BonusVisitor.h"
 #include "Constants.h"
 #include "Scores.h"
 #include "Lives.h"
@@ -27,23 +28,20 @@ private:
     Sprite sBackG;
     Ball sBall;
     Paddle sPaddle;
-    RectangleShape FPaddle;
     std::vector<Block> blocks;
-    std::vector<Bonus> Bonuses;
+    Bonuses bonuses;
 
     int BlocksLeft = 0;
     Scores scores;
     Lives lives;
-    Text  message, bonusText;
-    bool started = false, filmy = false, change = false, bonusActive = false;
-    int Adhesion = 0;
+    Text  message;
+    bool started;
+    BonusVisitor bonusVisitor;
 
     void initGame();
     void update();
-    void applyBonus(int type);
     void processEvents();
-    void render();
-    void CollisionBonusPaddle(Bonus& bonus, Paddle& sPaddle);   
+    void render(); 
 
 public:
     Game();
