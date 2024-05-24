@@ -9,7 +9,7 @@ void Paddle::LoadImg(const std::string& file_name) {
     sPaddle.setTexture(p);
 }
 
-float Paddle::update() {
+float Paddle::change() {
     if (Keyboard::isKeyPressed(Keyboard::Right)) {
         position_.x += 6;
         if (position_.x + sPaddle.getGlobalBounds().width > WIDTH) {
@@ -40,4 +40,5 @@ void Paddle::SetScale(float s){
     if (scale < 0.2) scale = 0.2f;
 }
 
+void Paddle::Update() {};
 FloatRect Paddle::GetBounds() { return sPaddle.getGlobalBounds(); }

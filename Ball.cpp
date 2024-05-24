@@ -33,4 +33,57 @@ float Ball::GetAngle() { return angleBall; }
 void Ball::SetAngle(float angle) { angleBall = angle; }
 void Ball::ChangeSpeed(float d) { dBall += d; }
 
+bool Ball:: CollisionBlock(Block& block, Scores& scores) {
+    if (FloatRect(position_.x, position_.y, 12, 12).intersects(block.GetBounds()))
+    {
+        angleBall = -angleBall;
+        if (block.GetType() == 3) {
+            scores.update(1);
+            block.SetNumber(block.GetNumber() - 1);
+            if (block.GetNumber() == 0) {
+                block.SetPosition(-100, -100);
+                return true;
+            }            
+        }
+        else if (block.GetType() == 1) {
+            block.SetNumber(block.GetNumber() - 1);
+            scores.update(1);
+            block.SetPosition(-100, -100);
+            dBall += 0.3;
+            return true;
+        }
+    }
+    return false;
+}
+
+void Ball::CollisionPaddle(Paddle& sPaddle, int& Adhesion){
+    if (FloatRect(position_.x, position_.y + 2, 12, 8).intersects(sPaddle.GetBounds())) {
+        angleBall = -angleBall;
+        if (Adhesion == 1) {
+            Adhesion = 2;
+        }
+    }
+}
+
+bool Ball::CollisionWall(bool& change, bool& filmy){
+    if (position_.x < 0 || position_.x > WIDTH || position_.y < 0) angleBall = 180 - angleBall; 
+    if (position_.y < 0) angleBall = -angleBall;
+    if (position_.y > 440) {
+        change = false;
+        if (filmy) {
+            filmy = false;
+            angleBall = -angleBall;
+        }
+        else {            
+            SetPosition(250, 200);
+            float angle;
+            do {
+                angle = rand() % 140;
+            } while ((angle > 75 && angle < 105) || (angle < 15));
+            angleBall = angle;
+            return true;
+        }
+    }
+    return false;
+}
 

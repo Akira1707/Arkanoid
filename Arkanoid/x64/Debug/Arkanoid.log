@@ -1,25 +1,8 @@
-﻿  Bonus.cpp
-  Game.cpp
-D:\2 kypce\Arkanoid\Constants.h(4,18): warning C4305: 'initializing': truncation from 'double' to 'float'
-  (compiling source file 'Game.cpp')
+﻿  Ball.cpp
+D:\pic\Arkanoid\Constants.h(4,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+  (compiling source file 'Ball.cpp')
   
-D:\2 kypce\Arkanoid\Game.cpp(25,45): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-D:\2 kypce\Arkanoid\Game.cpp(25,45): warning C4244:         with
-D:\2 kypce\Arkanoid\Game.cpp(25,45): warning C4244:         [
-D:\2 kypce\Arkanoid\Game.cpp(25,45): warning C4244:             T=float
-D:\2 kypce\Arkanoid\Game.cpp(25,45): warning C4244:         ]
-D:\2 kypce\Arkanoid\Game.cpp(25,38): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-D:\2 kypce\Arkanoid\Game.cpp(25,38): warning C4244:         with
-D:\2 kypce\Arkanoid\Game.cpp(25,38): warning C4244:         [
-D:\2 kypce\Arkanoid\Game.cpp(25,38): warning C4244:             T=float
-D:\2 kypce\Arkanoid\Game.cpp(25,38): warning C4244:         ]
-D:\2 kypce\Arkanoid\Game.cpp(38,34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\Game.cpp(121,31): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\2 kypce\Arkanoid\Game.cpp(148,32): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\2 kypce\Arkanoid\Game.cpp(151,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\Game.cpp(171,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\Game.cpp(172,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\Game.cpp(176,17): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-D:\2 kypce\Arkanoid\Game.cpp(177,29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-  Arkanoid.vcxproj -> D:\2 kypce\Arkanoid\x64\Debug\Arkanoid.exe
+D:\pic\Arkanoid\Ball.cpp(27,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+D:\pic\Arkanoid\Ball.cpp(52,25): warning C4305: '+=': truncation from 'double' to 'float'
+D:\pic\Arkanoid\Ball.cpp(81,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Arkanoid.vcxproj -> D:\pic\Arkanoid\x64\Debug\Arkanoid.exe

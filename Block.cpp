@@ -42,6 +42,7 @@ void Block::Draw(RenderWindow& window) {
     }       
 }
 
+void Block::Update() {};
 int Block::GetType() { return type; }
 int Block::GetNumber() { return number; }
 void Block:: SetNumber(int n) { number = n; }

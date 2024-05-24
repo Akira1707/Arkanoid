@@ -11,6 +11,8 @@
 #include "Block.h"
 #include "Bonus.h"
 #include "Constants.h"
+#include "Scores.h"
+#include "Lives.h"
 
 using namespace sf;
 
@@ -21,19 +23,18 @@ private:
     float bonusDuration = 5.0f;
     Font font;
 
-    Texture t, h;
+    Texture t;
     Sprite sBackG;
     Ball sBall;
     Paddle sPaddle;
     RectangleShape FPaddle;
     std::vector<Block> blocks;
     std::vector<Bonus> Bonuses;
-    std::vector<Sprite> sHearts;
 
     int BlocksLeft = 0;
-    int scores = 0;
-    int numberLives = 5;
-    Text textLives, textScores, message, bonusText;
+    Scores scores;
+    Lives lives;
+    Text  message, bonusText;
     bool started = false, filmy = false, change = false, bonusActive = false;
     int Adhesion = 0;
 
@@ -42,10 +43,6 @@ private:
     void applyBonus(int type);
     void processEvents();
     void render();
-
-    void CollisionBallBlock(Ball& sBall, Block& block);
-    void CollisionBallPaddle(Ball& sBall, Paddle& sPaddle);
-    void CollisionWall(Ball& sBall);
     void CollisionBonusPaddle(Bonus& bonus, Paddle& sPaddle);   
 
 public:

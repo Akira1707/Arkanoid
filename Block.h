@@ -7,6 +7,7 @@ class Block : public GameObject{
 public:
 	Block(Vector2f position_, Font& font);
 	void Draw(RenderWindow& windoem) override;
+    void Update() override;
     FloatRect GetBounds();
     int GetType();
     int GetNumber();
